@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Graphic Designer Portfolio</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #f9fafb;
+      color: #222;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background-color: #1b1f38;
+      color: #fff;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    nav a:hover {
+      border-bottom-color: #1b1f38;
+      color: #1b1f38;
+    }
+
+    /* Hero Section */
+    #hero {
+      background: linear-gradient(135deg, #222831 0%, #393E46 100%);
+      color: white;
+      padding: 80px 20px 60px;
+      text-align: center;
+    }
+    #hero .profile-pic {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 6px solid white;
+      object-fit: cover;
+      margin: 25px auto 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      background-color: rgb(255, 255, 255);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #hero .profile-pic:hover {
+      transform: scale(1.05);
+    }
+    #hero h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: 3px;
+    }
+    #hero p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Portfolio Section */
+    #portfolio {
+      padding: 40px 20px 80px;
+      background: #fff;
+    }
+    #portfolio h3 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #1b1f38;
+      letter-spacing: 1.5px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 25px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgb(0 0 0 / 0.2);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      flex-shrink: 0;
+    }
+    .gallery-item figcaption {
+      padding: 12px 15px;
+      font-weight: 600;
+      text-align: center;
+      color: #333;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* About Section */
+    #about {
+      background-color: #1b1f38;
+      color: #eee;
+      padding: 60px 20px 80px;
+      text-align: center;
+    }
+    #about h3 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      letter-spacing: 1.5px;
+    }
+    #about p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    /* Contact Section */
+    #contact {
+      padding: 60px 20px 80px;
+      text-align: center;
+      background: #fff;
+    }
+    #contact h3 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: #1b1f38;
+      letter-spacing: 1.5px;
+    }
+    #contact p {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: #444;
+    }
+    #contact a {
+      color: #f25c54;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    #contact a:hover {
+      color: #f9a47d;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1b1f38;
+      color: #888;
+      font-size: 0.9rem;
+      padding: 20px 0;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 150;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(27,31,56,0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      animation: zoomIn 0.3s ease forwards;
+    }
+    .modal-close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .modal-close:hover {
+      color: #f25c54;
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      to {
+        opacity:1;
+        transform: scale(1);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-direction: column;
+        gap: 15px;
+      }
+      #hero h2 {
+        font-size: 2.2rem;
+      }
+      nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .gallery-item img {
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <h1>My Porfolio</h1>
+      <nav>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero">
+    <div class="container">
+      <figure class="gallery-item profile-item" tabindex="0">
+        <img
+          class="profile-pic clickable"
+          src="IMG_1463.jpg"
+          alt="Cedrick Madrona Profile Picture"
+          data-full="IMG_1463.jpg"
+        />
+        <figcaption>Cedrick Madrona</figcaption>
+      </figure>
+      <h2>Experienced Graphic Designer | Efficient Admin Support Specialist</h2>
+      <p>Bringing imagination to life with unique and captivating visual designs. Let's create your brand story.</p>
+      <p>Empowering creativity with seamless organization and support. Let's build your brand story together.</p>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <h3>My Work</h3>
+      <div class="gallery">
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="1.jpg"
+            alt="Business Flyer"
+            data-full="1.jpg"
+          />
+          <figcaption>Business Flyer</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="2.jpg"
+            alt="Travel Poster"
+            data-full="2.jpg"
+          />
+          <figcaption>Travel Poster</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="3.jpeg"
+            alt="Thumbnail"
+            data-full="3.jpeg"
+          />
+          <figcaption>Thumbnail</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="4.jpg"
+            alt="Birthday Design"
+            data-full="4.jpg"
+          />
+          <figcaption>Birthday Design</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="5.jpg"
+            alt="Poster"
+            data-full="5.jpg"
+          />
+          <figcaption>Poster</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="6.jpeg"
+            alt="Car Rentals"
+            data-full="6.jpeg"
+          />
+          <figcaption>Car Rentals</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="7.jpeg"
+            alt="Tiktok Thumbnail"
+            data-full="7.jpeg"
+          />
+          <figcaption>Tiktok Thumbnail</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="8.jpeg"
+            alt="Food Menu"
+            data-full="8.jpeg"
+          />
+          <figcaption>Food Menu</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="9.jpeg"
+            alt="Reels"
+            data-full="9.jpeg"
+          />
+          <figcaption>Reels</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="10.jpg"
+            alt="Wedding Invitation"
+            data-full="10.jpg"
+          />
+          <figcaption>Wedding Invitation</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="11.jpeg"
+            alt="Branding"
+            data-full="11.jpeg"
+          />
+          <figcaption>Branding</figcaption>
+        </figure>
+        <figure class="gallery-item" tabindex="0">
+          <img
+            src="12.jpeg"
+            alt="Brand Design"
+            data-full="12.jpeg"
+          />
+          <figcaption>Brand Design</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h3>About Me</h3>
+      <p>Hello! I'm Cedrick Madrona, I am motivated and versatile professional with four years of combined experience in 
+        graphic design and administrative support. Seeking to contribute strong creative, technical, and 
+        organizational skills in a dynamic environment where attention to detail and efficiency are valued. 
+        Proven ability to design engaging digital and print media while supporting smooth office operations, 
+        document management, and internal communications. Committed to continuous learning and delivering quality results in 
+        both design and administrative functions.</p>
+        <p></p>
+        <h3>CORE COMPETENCIES</h3>
+        <h1>Graphic Design & Visual Communication</h1>
+        <h1>Branding, Content Layout & Print Media</h1>
+        <h1>Administrative Support & Office Coordination</h1>
+        <h1>Data Entry & Records Management</h1>
+        <h1>Social Media Visual Content Creation</h1>
+        <h1>Time Management & Multitasking</h1>
+        <h1>Supply & Inventory Monitoring</h1>
+      </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h3>Get in Touch</h3>
+      <p>I'd love to hear about your project or collaborate on creative ideas!</p>
+      <p>Email: <a href="mailto:cedrickmadrona25@gmail.com">cedrickmadrona25@gmail.com</a></p>
+      <p>
+        Facebook: <a href="https://www.facebook.com/cedrick.madrona00" target="_blank" rel="noopener">@cedrickmadrona</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">&copy; 2024 Cedrick Madrona - My Portfolio</div>
+  </footer>
+
+  <!-- Modal Structure -->
+  <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <span class="modal-close" aria-label="Close">&times;</span>
+    <img class="modal-content" id="modalImg" alt="Enlarged portfolio image" />
+    <div id="modalCaption" style="color:#fff;text-align:center;margin-top:8px;font-size:1rem;"></div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalCaption = document.getElementById('modalCaption');
+    const modalClose = modal.querySelector('.modal-close');
+
+    // Function to open modal with image and caption
+    function openModal(img) {
+      const fullSrc = img.getAttribute('data-full') || img.src;
+      modalImg.src = fullSrc;
+      modalImg.alt = img.alt;
+      modalCaption.textContent = img.alt;
+      modal.style.display = 'block';
+      modal.focus();
+    }
+
+    // Add click and keyboard enter support for gallery items & profile
+    const galleryItems = document.querySelectorAll('.gallery-item, .profile-item');
+
+    galleryItems.forEach((item) => {
+      const img = item.querySelector('img');
+
+      item.addEventListener('click', () => openModal(img));
+
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(img);
+        }
+      });
+    });
+
+    // Close modal on close button click
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modalImg.src = '';
+      modalCaption.textContent = '';
+    });
+
+    // Close modal clicking outside image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalCaption.textContent = '';
+      }
+    });
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalCaption.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
